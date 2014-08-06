@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <title>Client</title>
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/login.css" rel="stylesheet" />
+    <link href="css/flipclock.css" rel="stylesheet" />
+    <link href="css/jquery.sidr.dark.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.sidr.min.js"></script>
+    <script src="js/flipclock.js"></script>
+    <script src="js/SyncServer.js" charset="UTF-8"></script>
+    <script src="js/LocalStorage.js" charset="UTF-8"></script>
+    <script src="js/page.js" charset="UTF-8"></script>
+</head>
+
+<body onload="Sync.Init(); LocalStorage.Init(); Page.Init();">
+<!--Meny -->
+<div id="sidr">
+    <ul>
+       <!-- <li><a href="#" onclick="test2();">Se credentials</a></li>-->
+        <li><a id="logout" href="#" onclick="Page.Logout();">Logga ut</a></li>
+    <!--    <li><a href="#"onclick="alert(LocalStorage.GetProjects());">See projects</a></li>
+        <li><a href="#"onclick="Sync.GetProjects();">Hämta projects</a></li>
+         <li><a href="#"onclick="Page.Load();">Ladda sida</a></li>
+          <li><a href="#"onclick="alert(Page.pageNr);">Se sidnr</a></li>-->
+           <!--<li><a href="#"onclick="">Inställningar</a></li>-->
+
+      </ul>
+</div>
+<header>
+    <h1>Timelogger</h1>
+</header>
+    <nav>
+        <div id="simple-menu" class="btn btn-primary col-lg-2 col-sm-2 col-xs-2"> 
+            <img src="img/bars.png" alt="horizontal bars" />
+        </div>
+       <div class="btn btn-primary col-lg-5 col-sm-5 col-xs-5" onclick="Page.showStats = false; Page.Load();"><p>HOME</p></div>
+       <div class="btn btn-primary col-lg-5 col-sm-5 col-xs-5" onclick="Page.showStats = true; Page.Load();"><p>STATS</p></div>
+      <div style="clear: both"></div>
+    </nav>
+    
+    <div id="content">
+        <div id="page1">    
+            <div class='clock'></div>
+            <button class="btn btn-block btn-primary" onclick='clock.start(); LocalStorage.clockStarted = true;'>Starta</button>
+            <button class="btn btn-block btn-primary" onclick='clock.stop();'>Stoppa</button>
+            <button class="btn btn-block btn-primary" onclick='var time = clock.getTime(); time -= 300; if(time > 0){ clock.setTime(time);} LocalStorage.DecreaseTime(5);'>Ta bort 5 min</button>
+             <button class="btn btn-block btn-primary" onclick='if(LocalStorage.timeLogged >= 5){clock.stop(); LocalStorage.SaveTime(); Page.pageNr = 2; Page.Load();LocalStorage.clockStarted = false;}'>Skicka Loggar</button>
+            
+        </div>
+        
+        <div id="page2">
+            
+        </div>
+         <div id="stats">
+         
+        </div>
+    </div>
+    <footer>
+        <p>TimeLogger</p>
+    </footer>
+    <!-- Login form -->
+     <div id="loginmodal" style="display:none;">
+    <h1>User Login</h1>
+    <div id="loginform" name="loginform">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="txtbx_username" class="txtfield" tabindex="1">
+      
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="txtbx_password" class="txtfield" tabindex="2">
+      <label for="username">Server:</label>
+      <input type="text" name="username" id="txtbx_server" class="txtfield" tabindex="3">  
+      
+      <div class="center"><input type="button" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Log In" tabindex="4" onclick="Sync.Login();"></div>
+    </div>
+  </div>
+<script>
+    //timer
+    var clock;
+    var antalSekunder = 0;
+    
+ function logout() {
+    LocalStorage.ClearCredentials();
+    Page.pageNr = 0;
+    Page.Load();
+ }
+
+   function test2() {
+    var cred = LocalStorage.GetCredentials();
+    alert(JSON.stringify(cred));
+   }
+   
+   //sidomeny
+$(document).ready(function() {
+  $('#simple-menu, #logout').sidr();
+ 
+ //skall tas bort
+    $('#loginform').submit(function(e){
+   alert("KLICKAT");
+  });
+    
+  clock = $('.clock').FlipClock({
+    autoStart:false,
+    interval:1000, //skall vara 1000 för en sekund
+      callbacks: {
+		interval: function() {
+		 	  antalSekunder++;
+                          if (antalSekunder%60 == 0) {
+                                LocalStorage.timeLogged++;
+                          }
+		}
+	}
+    });
+  
+});
+
+</script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

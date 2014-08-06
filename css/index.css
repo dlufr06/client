@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #f3f6fa;
+}
+/*Using Bootstrap now */
+/*body button{
+    height: 120px;
+    padding: 10px 20px;
+    margin-right: 40px;
+    font-size: 15px;
+}*/
+
+/* HEADER */
+header{
+     background: #307DBD;
+     height: 100px;
+     position: fixed;
+     top:0px;
+     width: 100%;
+     z-index: 99;
+}
+/* MENY  o Footer*/
+footer{
+    height: 100px;
+}
+nav{
+    position: fixed;
+    top: 100px;
+   width: 100%;
+   z-index: 99;
+}
+footer{
+display: inline-block;
+width:100%;
+background-color: #4F95CF;
+}
+/*nav div:first-child{
+    width: 8%;
+    float: left;
+    height: 100px;
+}*/
+nav img{    
+    height: 30px;
+    width:30px;
+}
+.button{
+    height: 100px;
+    list-style: none;
+    box-sizing: border-box;
+    width:46%;
+    float: left;
+}
+.button > p, footer p,header h1{
+    color: #edf4f9;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size:4em;
+    display:table;
+    margin: auto;
+}
+
+/*Content*/
+#content{
+    margin-top: 200px;
+    min-height: 100px;
+    padding: 35px 2% 15px 2%;
+}
+fieldset{
+   padding: 1% 2% 8% 2%;
+   border-radius:5px;
+   margin: 5px 0;
+   box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
+   background-image: linear-gradient(to bottom, #ffffff, #efefef    ,#ffffff);
+}
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: silver;
+    width: 85%;
+    height:20px;
+
+    margin-bottom: 1em;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+    background-color: #666;
+    opacity: 0.5;
+    width: 25px;
+    height: 32px;
+  
+}
+output{
+    width: 10%;
+    font-size: 2em;
+    margin-left:1%;
+}
+label{
+    width:15%;
+    height: 2em;
+}
+legend{
+    font-size: 3em;
+    font-weight: bold;
+}
+#content input[type="text"]{
+    width: 85%;
+    height: 2em;
+}
+.desc{
+    font-style: italic;
+    
+}
+#content button{
+    font-size: 3em;
+    width:80%;
+    margin: 0.5em 10% 0em 10%;
+    background-image: linear-gradient(to bottom, #a7cfdf, #23538a);
+    color:white;
+}
