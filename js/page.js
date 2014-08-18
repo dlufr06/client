@@ -52,13 +52,28 @@ var Page = {
                 $("footer").css("display","none");
                 
                 //sätt clockan = 0;
-               if (!LocalStorage.clockStarted) {
-                  if (localStorage.timeSaved) { //hämta ev sparad tid!
-                    LocalStorage.timeLogged += parseInt(localStorage.timeSaved);
-                    localStorage.timeSaved = "0";
+               //if (!LocalStorage.clockStarted) {
+               //   if (localStorage.timeSaved) { //hämta ev sparad tid!
+               //     LocalStorage.timeLogged += parseInt(localStorage.timeSaved);
+               //     localStorage.timeSaved = "0";
+               // }
+               // clock.setTime(LocalStorage.timeLogged*60);
+               // antalSekunder = 0; 
+               //}
+               if (LocalStorage.clockIn > 0) {//dvs incheckad
+                document.getElementById("btn-clock-in").style.display = "none";
+                document.getElementById("btn-clock-out").style.display = "block";
+                document.getElementById("btn-send-loggs").style.display = "none";
+               }
+               else{
+                 document.getElementById("btn-clock-in").style.display = "block";
+                document.getElementById("btn-clock-out").style.display = "none";
+                if (LocalStorage.timeLogged >= 5) {
+                    document.getElementById("btn-send-loggs").style.display = "block";
                 }
-                clock.setTime(LocalStorage.timeLogged*60);
-                antalSekunder = 0; 
+                else{
+                    document.getElementById("btn-send-loggs").style.display = "none";
+                }
                }
               
             }

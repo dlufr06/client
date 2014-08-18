@@ -1,5 +1,6 @@
     var LocalStorage  = {
         
+        clockIn:0,
         userVerified:false,
         timeLogged:0,
         clockStarted:false,
@@ -32,6 +33,9 @@
             }
             if (localStorage.server) {
                 this.server = localStorage.server;
+            }
+            if (localStorage.clockIn) {
+                this.clockIn = parseInt(localStorage.clockIn);
             }
            
         },
@@ -131,6 +135,24 @@
             this.timeLogged -= this.timeLogged%5;
             //spara
             localStorage.timeLogged = this.timeLogged.toString();   
+        },
+        ClockIn:function(){
+            var d = new Date();
+            this.clockIn = d.getTime();
+            localStorage.clockIn = this.clockIn.toString();
+            },
+        ClockOut:function(){
+            var d = new Date();
+            var clockOut = d.getTime();
+            var minutesLogged = (clockOut-this.clockIn)/60000;
+            minutesLogged = Math.round(minutesLogged);
+            this.timeLogged += minutesLogged;
+            localStorage.timeLogged = this.timeLogged.toString();   
+            
+            //nollställ klockorna
+            this.clockIn = 0;
+            localStorage.clockIn = "0";
+            
         }
         
     }
