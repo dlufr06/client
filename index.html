@@ -47,7 +47,7 @@
     <div id="content">
         <div id="page1">    
             <button id="btn-clock-in" class="btn btn-block btn-primary" onclick="LocalStorage.ClockIn(); Page.Load();">Stämpla in</button>
-            <button id="btn-clock-out" class="btn btn-block btn-primary" onclick="LocalStorage.ClockOut(); Page.Load(); alert('instämplad:'+LocalStorage.clockIn+'\nsparad tid:'+LocalStorage.timeLogged);" style="display:none;">Stämpla ut</button>
+            <button id="btn-clock-out" class="btn btn-block btn-primary" onclick="LocalStorage.ClockOut(); Page.Load();" style="display:none;">Stämpla ut</button>
             <button id="btn-send-loggs" class="btn btn-block btn-primary" onclick='if(LocalStorage.timeLogged >= 5){LocalStorage.SaveTime(); Page.pageNr = 2; Page.Load();}'>Skicka Loggar</button>
             
         </div>
